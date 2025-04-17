@@ -4,7 +4,7 @@ namespace tp3_chronologique
 {
     class Program
     {
-
+        const int QTE_FAITS = 3;
 
         static void Main(string[] args)
         {
@@ -36,9 +36,10 @@ namespace tp3_chronologique
                 Console.Clear();
                 AfficherTitre("Manche ");
 
-                // TODO 05 : Créer un tableau de faits aléatoires pour la manche
+                Fait[] tabFaitsRandom = FctUtiles.ChoisirFaitsAleatoires(tabFaits, QTE_FAITS);
 
                 // TODO 06 : Compléter la fonction JouerManche
+                bool mancheReussie = JouerManche(tabFaitsRandom);
 
                 // TODO 10 : Créer la dynamique de boucle des manches
 
@@ -78,7 +79,15 @@ namespace tp3_chronologique
 
             Console.Write("\nEntrez le numéro des faits dans l'ordre chronologique : \n");
 
-            // TODO 07  : Saisie de l'ordre choisie par le joueur
+            bool mancheReussie = true;
+            Fait[] tabFaitsResponse = new Fait[QTE_FAITS];
+
+            for (int i = 0; i < QTE_FAITS; i++)
+            {
+                Console.Write(" -> ");
+                int nbrEntre = Convert.ToInt32(Console.ReadLine());
+                tabFaitsResponse[i] = tabFaits[nbrEntre - 1];     
+            }
 
             // TODO 08  : Vérification si l'ordre est chronologique
 
@@ -87,7 +96,7 @@ namespace tp3_chronologique
             // À modifier pour une valeur en fonction du résultat de la manche
             // - true : si la manche est réussie (les faits ont été classé dans l’ordre chronologique)
             // - false : si la manche n’est pas réussie.
-            return true;
+            return mancheReussie;
         }
 
         #region Fonctions d'affichage 
